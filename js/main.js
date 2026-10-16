@@ -904,6 +904,20 @@
 	// ========================
 
 	var PROJECT_DATA = {
+		codexion: {
+			name: 'Codexion',
+			description: 'A multithreaded simulation built in C, coordinating coders sharing limited resources with mutexes, condition variables, and FIFO or EDF scheduling to handle deadlocks, data races, and starvation.',
+			tech: ['C', 'Concurrency & Multithreading', 'POSIX Threads & Mutexes', 'Condition Variables & Synchronization', 'FIFO / EDF Scheduling'],
+			github: 'https://github.com/Tweakkin/Codexion',
+			media: 'assets/codexion.png'
+		},
+		call_me_maybe: {
+			name: 'Call Me Maybe',
+			description: 'An LLM function-calling engine built in Python, using constrained decoding and token masking to generate structured JSON calls with validated function names and parameter types.',
+			tech: ['Python', 'LLM Function Calling', 'Constrained Decoding & Token Masking', 'Pydantic Data Validation', 'NumPy & Greedy Decoding'],
+			github: 'https://github.com/Tweakkin/Call_Me_Maybe_2',
+			media: 'assets/call_me_maybe.png'
+		},
 		fly_in: {
 			name: 'Fly-in',
 			description: "A routing engine built in Python, where drone fleets fight for limited network capacity, solved with custom Dijkstra and deadlock-free scheduling.",
@@ -969,9 +983,43 @@
 		var closeBtn = $('#proj-modal-close');
 		if (!modal) return;
 
+		var projectPhoto = $('#proj-modal-media');
+
+		function setPhotoExpanded(expanded) {
+			modal.classList.toggle('proj-modal--photo-expanded', expanded);
+			projectPhoto.setAttribute('aria-expanded', String(expanded));
+			projectPhoto.title = expanded ? 'Click to reduce' : 'Click to enlarge';
+		}
+
+		function togglePhoto() {
+			if (!modal.classList.contains('proj-modal--has-photo-zoom')) return;
+			setPhotoExpanded(!modal.classList.contains('proj-modal--photo-expanded'));
+		}
+
+		projectPhoto.addEventListener('click', togglePhoto);
+		projectPhoto.addEventListener('keydown', function (e) {
+			if (modal.classList.contains('proj-modal--has-photo-zoom') && (e.key === 'Enter' || e.key === ' ')) {
+				e.preventDefault();
+				togglePhoto();
+			}
+		});
+
 		function openModal(projectKey) {
 			var data = PROJECT_DATA[projectKey];
 			if (!data) return;
+			var canZoomPhoto = projectKey === 'call_me_maybe';
+			modal.classList.toggle('proj-modal--has-photo-zoom', canZoomPhoto);
+			modal.classList.remove('proj-modal--photo-expanded');
+			if (canZoomPhoto) {
+				projectPhoto.setAttribute('role', 'button');
+				projectPhoto.setAttribute('tabindex', '0');
+				projectPhoto.setAttribute('aria-label', 'Toggle larger pipeline image');
+				setPhotoExpanded(false);
+			} else {
+				['role', 'tabindex', 'aria-label', 'aria-expanded', 'title'].forEach(function (attribute) {
+					projectPhoto.removeAttribute(attribute);
+				});
+			}
 
 			$('#proj-modal-title').textContent = data.name;
 			$('#proj-modal-desc').textContent = data.description;
@@ -1027,6 +1075,11 @@
 		overlay.addEventListener('click', closeModal);
 
 		document.addEventListener('keydown', function (e) {
+			if (e.key === 'Escape' && modal.classList.contains('proj-modal--photo-expanded')) {
+				setPhotoExpanded(false);
+				projectPhoto.focus();
+				return;
+			}
 			if (e.key === 'Escape') closeModal();
 		});
 	}

@@ -42,7 +42,7 @@
 		rel="stylesheet" />
 
 	<!-- Styles -->
-	<link rel="stylesheet" href="css/style.css?v=8" />
+	<link rel="stylesheet" href="css/style.css?v=11" />
 
 	<!-- Spline Viewer Web Component -->
 	<script type="module" src="https://unpkg.com/@splinetool/viewer/build/spline-viewer.js"></script>
@@ -273,6 +273,42 @@
 				</p>
 
 				<div class="proj-grid" id="projects-grid">
+
+					<div class="proj-card animate-on-scroll slide-up" data-project="codexion">
+						<div class="proj-card__header">
+							<svg class="proj-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+							<span class="proj-card__hint">View Details →</span>
+						</div>
+						<div class="proj-card__body">
+							<h3 class="proj-card__name">Codexion</h3>
+							<p class="proj-card__desc">A multithreaded simulation built in C, coordinating coders sharing limited resources with mutexes, condition variables, and FIFO or EDF scheduling to handle deadlocks, data races, and starvation.</p>
+						</div>
+						<div class="proj-card__tags">
+							<span class="proj-card__tag proj-card__tag--lang">C</span>
+							<span class="proj-card__tag">Concurrency & Multithreading</span>
+							<span class="proj-card__tag">POSIX Threads & Mutexes</span>
+							<span class="proj-card__tag">Condition Variables & Synchronization</span>
+							<span class="proj-card__tag">FIFO / EDF Scheduling</span>
+						</div>
+					</div>
+
+					<div class="proj-card animate-on-scroll slide-up" data-project="call_me_maybe">
+						<div class="proj-card__header">
+							<svg class="proj-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+							<span class="proj-card__hint">View Details →</span>
+						</div>
+						<div class="proj-card__body">
+							<h3 class="proj-card__name">Call Me Maybe</h3>
+							<p class="proj-card__desc">An LLM function-calling engine built in Python, using constrained decoding and token masking to generate structured JSON calls with validated function names and parameter types.</p>
+						</div>
+						<div class="proj-card__tags">
+							<span class="proj-card__tag proj-card__tag--lang">Python</span>
+							<span class="proj-card__tag">LLM Function Calling</span>
+							<span class="proj-card__tag">Constrained Decoding & Token Masking</span>
+							<span class="proj-card__tag">Pydantic Data Validation</span>
+							<span class="proj-card__tag">NumPy & Greedy Decoding</span>
+						</div>
+					</div>
 
 					<div class="proj-card animate-on-scroll slide-up" data-project="fly_in">
 						<div class="proj-card__header">
@@ -809,7 +845,7 @@
 	</footer>
 
 	<!-- ======================== SCRIPTS ======================== -->
-	<script src="js/main.js?v=10"></script>
+	<script src="js/main.js?v=13"></script>
 	<script src="js/background.js"></script>
 </body>
 
